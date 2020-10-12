@@ -22,16 +22,23 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   ) async* {
     if (event is FilterListEvent) {
       if (event.filterValue.isNotEmpty) {
-      List<AutoModel> _list = this
-          .list
-          .where((AutoModel autoModel) => autoModel.value
-              .toLowerCase()
-              .contains(event.filterValue.toLowerCase()))
-          .toList();
-      if (_list.length > 0)
-        yield FilteredListState(_list);
-      else
-        yield HiddenListState();
+        List<AutoModel> _list = this
+            .list
+            .where((AutoModel autoModel) => autoModel.value
+                .toLowerCase()
+                .contains(event.filterValue.toLowerCase()))
+            .toList();
+        if (_list.length > 0) {
+          if (_list.length == 1 &&
+              _list.elementAt(0).value.toLowerCase() ==
+                  event.filterValue.toLowerCase()) {
+            yield HiddenListState();
+          } else {
+            yield FilteredListState(_list);
+          }
+        } else {
+          yield HiddenListState();
+        }
       } else {
         yield HiddenListState();
       }
