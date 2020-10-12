@@ -11,6 +11,9 @@ class ListWidget extends StatelessWidget {
     return BlocBuilder<ListBloc, ListState>(
         bloc: listBloc,
         builder: (BuildContext context, ListState listState) {
+          List<Widget> widgets = List();
+          for (AutoModel autoModel in (listState as FilteredListState).list)
+            widgets.add(_itemWidget(autoModel));
           return Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
@@ -18,12 +21,15 @@ class ListWidget extends StatelessWidget {
             height: 200.0,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: (listState as FilteredListState).list?.length ?? 0,
-                itemBuilder: (context, index) => _itemWidget(
-                    (listState as FilteredListState).list.elementAt(index)),
+              child: Column(
+                children: widgets,
               ),
+              // child: ListView.builder(
+              //   shrinkWrap: true,
+              //   itemCount: (listState as FilteredListState).list?.length ?? 0,
+              //   itemBuilder: (context, index) => _itemWidget(
+              //       (listState as FilteredListState).list.elementAt(index)),
+              // ),
             ),
           );
         });
