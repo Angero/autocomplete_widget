@@ -8,3 +8,7 @@ class FilteredListState extends ListState {
 
   FilteredListState(this.list);
 }
+
+class HiddenListState extends ListState {
+
+}

@@ -14,7 +14,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   ListBloc(this.list);
 
   @override
-  ListState get initialState => FilteredListState(this.list);
+  ListState get initialState => HiddenListState();
 
   @override
   Stream<ListState> mapEventToState(
@@ -27,7 +27,10 @@ class ListBloc extends Bloc<ListEvent, ListState> {
               .toLowerCase()
               .contains(event.filterValue.toLowerCase()))
           .toList();
-      yield FilteredListState(_list);
+      if (_list.length > 0)
+        yield FilteredListState(_list);
+      else
+        yield HiddenListState();
     }
   }
 }

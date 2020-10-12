@@ -11,6 +11,7 @@ class ListWidget extends StatelessWidget {
     return BlocBuilder<ListBloc, ListState>(
         bloc: listBloc,
         builder: (BuildContext context, ListState listState) {
+          if (listState is HiddenListState) return Container();
           List<Widget> widgets = List();
           for (AutoModel autoModel in (listState as FilteredListState).list)
             widgets.add(_itemWidget(autoModel));
