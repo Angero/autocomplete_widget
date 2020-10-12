@@ -12,6 +12,13 @@ class FieldWidget extends StatelessWidget {
         bloc: fieldBloc,
         builder: (BuildContext context, FieldState fieldState) {
           return TextField(
+            // initialValue: (fieldState is InitialedFieldState)
+            //     ? fieldState.value
+            //     : ,
+            // controller: TextEditingController(
+            //     text: (fieldState is InitialedFieldState)
+            //         ? fieldState.value
+            //         : null),
             decoration: InputDecoration(
                 errorText: fieldState is ErrorFieldState ? 'Error' : null),
             onChanged: (value) {
