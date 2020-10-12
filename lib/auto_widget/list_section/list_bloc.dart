@@ -23,8 +23,9 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     if (event is FilterListEvent) {
       List<AutoModel> _list = this
           .list
-          .where((AutoModel autoModel) =>
-              autoModel.value.contains(event.filterValue))
+          .where((AutoModel autoModel) => autoModel.value
+              .toLowerCase()
+              .contains(event.filterValue.toLowerCase()))
           .toList();
       yield FilteredListState(_list);
     }

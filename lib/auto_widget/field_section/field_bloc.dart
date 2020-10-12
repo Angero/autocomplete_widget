@@ -17,7 +17,7 @@ class FieldBloc extends Bloc<FieldEvent, FieldState> {
   @override
   Stream<FieldState> mapEventToState(FieldEvent event) async* {
     if (event is ChangeFieldEvent) {
-      yield ChangingFieldState();
+      // yield ChangingFieldState();
       if (event.value.isNotEmpty)
         yield ChangedFieldState(event.value);
       else

@@ -24,12 +24,6 @@ class ListWidget extends StatelessWidget {
               child: Column(
                 children: widgets,
               ),
-              // child: ListView.builder(
-              //   shrinkWrap: true,
-              //   itemCount: (listState as FilteredListState).list?.length ?? 0,
-              //   itemBuilder: (context, index) => _itemWidget(
-              //       (listState as FilteredListState).list.elementAt(index)),
-              // ),
             ),
           );
         });
