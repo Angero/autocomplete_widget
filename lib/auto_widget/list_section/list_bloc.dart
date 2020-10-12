@@ -21,6 +21,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     ListEvent event,
   ) async* {
     if (event is FilterListEvent) {
+      if (event.filterValue.isNotEmpty) {
       List<AutoModel> _list = this
           .list
           .where((AutoModel autoModel) => autoModel.value
@@ -31,6 +32,9 @@ class ListBloc extends Bloc<ListEvent, ListState> {
         yield FilteredListState(_list);
       else
         yield HiddenListState();
+      } else {
+        yield HiddenListState();
+      }
     }
   }
 }
