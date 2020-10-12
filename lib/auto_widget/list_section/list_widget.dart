@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled4/auto_widget/auto_model.dart';
+import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
 import 'package:untitled4/auto_widget/list_section/list_bloc.dart';
 
 class ListWidget extends StatelessWidget {
@@ -14,7 +15,7 @@ class ListWidget extends StatelessWidget {
           if (listState is HiddenListState) return Container();
           List<Widget> widgets = List();
           for (AutoModel autoModel in (listState as FilteredListState).list)
-            widgets.add(_itemWidget(autoModel));
+            widgets.add(_itemWidget(context, autoModel));
           return Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
@@ -30,12 +31,12 @@ class ListWidget extends StatelessWidget {
         });
   }
 
-  Widget _itemWidget(AutoModel autoModel) {
+  Widget _itemWidget(BuildContext context, AutoModel autoModel) {
     return Container(
       height: 48.0,
       child: InkWell(
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             children: [
               Text(autoModel.value),
@@ -44,7 +45,8 @@ class ListWidget extends StatelessWidget {
           ),
         ),
         onTap: () {
-          print(autoModel.id.toString());
+          BlocProvider.of<FieldBloc>(context)
+              .add(ChangeFieldEvent(autoModel.value));
         },
       ),
     );
