@@ -22,8 +22,11 @@ class ListWidget extends StatelessWidget {
             height: 200.0,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Column(
-                children: widgets,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: widgets,
+                ),
               ),
             ),
           );
@@ -34,7 +37,12 @@ class ListWidget extends StatelessWidget {
     return Container(
       height: 48.0,
       child: InkWell(
-        child: Text(autoModel.value),
+        child: Row(
+          children: [
+            Text(autoModel.value),
+            Expanded(child: Container(), flex: 1),
+          ],
+        ),
         onTap: () {
           print(autoModel.id.toString());
         },
