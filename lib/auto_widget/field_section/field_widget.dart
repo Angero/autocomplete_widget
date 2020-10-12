@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
+import 'package:untitled4/auto_widget/list_section/list_bloc.dart';
 
 class FieldWidget extends StatelessWidget {
   @override
@@ -15,6 +16,7 @@ class FieldWidget extends StatelessWidget {
                 errorText: fieldState is ErrorFieldState ? 'Error' : null),
             onChanged: (value) {
               fieldBloc.add(ChangeFieldEvent(value));
+              BlocProvider.of<ListBloc>(context).add(FilterListEvent(value));
             },
           );
         });

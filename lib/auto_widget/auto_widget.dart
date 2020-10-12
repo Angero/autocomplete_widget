@@ -26,6 +26,8 @@ class AutoWidget extends StatelessWidget {
           create: (context) => listBloc,
         ),
       ],
+      child: _buildColumn(),
+/*
       child: MultiBlocListener(
         listeners: [
           BlocListener<FieldBloc, FieldState>(
@@ -40,6 +42,7 @@ class AutoWidget extends StatelessWidget {
         ],
         child: _buildColumn(),
       ),
+*/
     );
   }
 
