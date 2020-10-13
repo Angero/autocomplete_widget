@@ -32,7 +32,7 @@ class FieldBloc extends Bloc<FieldEvent, FieldState> {
             .toList();
         if (_list.length == 1 &&
             _list.elementAt(0).value.toLowerCase() == event.value.toLowerCase())
-          yield InitialedFieldState(event.value);
+          yield InitialedFieldState(_list.elementAt(0).value);
         else
           yield ChangedFieldState(event.value);
       } else {
