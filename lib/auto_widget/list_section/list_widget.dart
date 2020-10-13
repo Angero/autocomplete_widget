@@ -50,9 +50,9 @@ class ListWidget extends StatelessWidget {
           ),
         ),
         onTap: () {
-          // BlocProvider.of<FieldBloc>(context)
-          //     .add(InitialFieldEvent(autoModel.value));
-          fieldController.text = 'zzzz';
+          BlocProvider.of<FieldBloc>(context)
+              .add(InitialFieldEvent(autoModel.value));
+          // fieldController.text = 'zzzz';
         },
       ),
     );

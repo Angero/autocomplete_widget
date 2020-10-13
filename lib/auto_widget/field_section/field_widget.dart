@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
 import 'package:untitled4/auto_widget/list_section/list_bloc.dart';
 
@@ -16,6 +15,8 @@ class FieldWidget extends StatelessWidget {
     return BlocBuilder<FieldBloc, FieldState>(
         bloc: fieldBloc,
         builder: (BuildContext context, FieldState fieldState) {
+          if (fieldState is InitialedFieldState)
+            fieldController.text = fieldState.value;
           return TextField(
             controller: fieldController,
             decoration: InputDecoration(
