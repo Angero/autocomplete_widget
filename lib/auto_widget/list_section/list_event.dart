@@ -8,3 +8,4 @@ class FilterListEvent extends ListEvent {
 
   FilterListEvent(this.filterValue);
 }
+

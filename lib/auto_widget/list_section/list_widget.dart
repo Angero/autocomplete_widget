@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:untitled4/auto_widget/auto_model.dart';
 import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
 import 'package:untitled4/auto_widget/list_section/list_bloc.dart';
@@ -36,7 +35,8 @@ class ListWidget extends StatelessWidget {
         });
   }
 
-  Widget _itemWidget(BuildContext context, AutoModel autoModel, TextEditingController fieldController) {
+  Widget _itemWidget(BuildContext context, AutoModel autoModel,
+      TextEditingController fieldController) {
     return Container(
       height: 48.0,
       child: InkWell(
@@ -52,7 +52,8 @@ class ListWidget extends StatelessWidget {
         onTap: () {
           BlocProvider.of<FieldBloc>(context)
               .add(InitialFieldEvent(autoModel.value));
-          // fieldController.text = 'zzzz';
+          BlocProvider.of<ListBloc>(context)
+              .add(FilterListEvent(autoModel.value));
         },
       ),
     );

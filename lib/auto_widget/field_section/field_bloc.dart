@@ -11,10 +11,14 @@ class FieldBloc extends Bloc<FieldEvent, FieldState> {
   FieldBloc();
 
   @override
-  FieldState get initialState => ChangedFieldState('');
+  FieldState get initialState => InitialedFieldState('');
 
   @override
   Stream<FieldState> mapEventToState(FieldEvent event) async* {
+    if (event is InitialFieldEvent) {
+      yield InitialedFieldState(event.value);
+    }
+
     if (event is ChangeFieldEvent) {
       if (event.value.isNotEmpty)
         yield ChangedFieldState(event.value);
@@ -22,8 +26,5 @@ class FieldBloc extends Bloc<FieldEvent, FieldState> {
         yield ErrorFieldState();
     }
 
-    if (event is InitialFieldEvent) {
-      yield InitialedFieldState(event.value);
-    }
   }
 }
