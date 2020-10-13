@@ -28,11 +28,10 @@ class ListBloc extends Bloc<ListEvent, ListState> {
               .toLowerCase()
               .contains(event.filterValue.toLowerCase()))
           .toList();
-      if (!(_list.length == 1 &&
+      if (_list.length == 1 &&
           _list.elementAt(0).value.toLowerCase() ==
-              event.filterValue.toLowerCase())) {
-        if (_list.length > 0) result = FilteredListState(_list);
-      }
+              event.filterValue.toLowerCase()) {
+      } else if (_list.length > 0) result = FilteredListState(_list);
     }
     if (result == null)
       yield HiddenListState();

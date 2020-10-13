@@ -17,7 +17,7 @@ class AutoWidget extends StatelessWidget {
     // ignore: close_sinks
     AutoBloc autoBloc = AutoBloc();
     // ignore: close_sinks
-    FieldBloc fieldBloc = FieldBloc();
+    FieldBloc fieldBloc = FieldBloc(autoList);
     // ignore: close_sinks
     ListBloc listBloc = ListBloc(autoList);
     return MultiBlocProvider(
