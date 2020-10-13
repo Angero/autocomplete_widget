@@ -15,11 +15,11 @@ class AutoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
+    AutoBloc autoBloc = AutoBloc();
+    // ignore: close_sinks
     FieldBloc fieldBloc = FieldBloc();
     // ignore: close_sinks
     ListBloc listBloc = ListBloc(autoList);
-    // ignore: close_sinks
-    AutoBloc autoBloc = AutoBloc(fieldBloc: fieldBloc, listBloc: listBloc);
     return MultiBlocProvider(
       providers: [
         BlocProvider<AutoBloc>(

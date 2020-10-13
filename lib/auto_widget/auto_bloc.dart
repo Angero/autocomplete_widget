@@ -10,10 +10,6 @@ part 'auto_event.dart';
 part 'auto_state.dart';
 
 class AutoBloc extends Bloc<AutoEvent, AutoState> {
-  final FieldBloc fieldBloc;
-  final ListBloc listBloc;
-
-  AutoBloc({this.fieldBloc, this.listBloc});
 
   @override
   AutoState get initialState => FetchedAutoState(null);
@@ -21,9 +17,11 @@ class AutoBloc extends Bloc<AutoEvent, AutoState> {
   @override
   Stream<AutoState> mapEventToState(AutoEvent event) async* {
     if (event is CompareAutoEvent) {
-      if (this.fieldBloc.state is ChangedFieldState && this.listBloc.state is FilteredListState) {
-        print('text');
-      }
+      print(event.fieldBloc.state);
+      print(event.listBloc.state);
+      // if (event.fieldBloc.state is ChangedFieldState && this.listBloc.state is FilteredListState) {
+      //   print('text');
+      // }
     }
     if (event is FetchAutoEvent) {
       yield FetchedAutoState(event.id);

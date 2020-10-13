@@ -12,7 +12,11 @@ class FieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
+    AutoBloc autoBloc = BlocProvider.of<AutoBloc>(context);
+    // ignore: close_sinks
     FieldBloc fieldBloc = BlocProvider.of<FieldBloc>(context);
+    // ignore: close_sinks
+    ListBloc listBloc = BlocProvider.of<ListBloc>(context);
     return BlocBuilder<FieldBloc, FieldState>(
         bloc: fieldBloc,
         builder: (BuildContext context, FieldState fieldState) {
@@ -24,8 +28,9 @@ class FieldWidget extends StatelessWidget {
                 errorText: fieldState is ErrorFieldState ? 'Error' : null),
             onChanged: (value) {
               fieldBloc.add(ChangeFieldEvent(value));
-              BlocProvider.of<ListBloc>(context).add(FilterListEvent(value));
-              BlocProvider.of<AutoBloc>(context).add(CompareAutoEvent());
+              listBloc.add(FilterListEvent(value));
+              autoBloc.add(
+                  CompareAutoEvent(fieldBloc: fieldBloc, listBloc: listBloc));
             },
           );
         });
