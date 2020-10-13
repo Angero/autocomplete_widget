@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled4/auto_widget/auto_bloc.dart';
 import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
 import 'package:untitled4/auto_widget/list_section/list_bloc.dart';
 
@@ -24,6 +25,7 @@ class FieldWidget extends StatelessWidget {
             onChanged: (value) {
               fieldBloc.add(ChangeFieldEvent(value));
               BlocProvider.of<ListBloc>(context).add(FilterListEvent(value));
+              BlocProvider.of<AutoBloc>(context).add(CompareAutoEvent());
             },
           );
         });

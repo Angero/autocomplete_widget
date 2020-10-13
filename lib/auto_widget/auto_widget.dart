@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:untitled4/auto_widget/auto_bloc.dart';
 import 'package:untitled4/auto_widget/auto_model.dart';
 import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
 import 'package:untitled4/auto_widget/field_section/field_widget.dart';
@@ -18,8 +18,13 @@ class AutoWidget extends StatelessWidget {
     FieldBloc fieldBloc = FieldBloc();
     // ignore: close_sinks
     ListBloc listBloc = ListBloc(autoList);
+    // ignore: close_sinks
+    AutoBloc autoBloc = AutoBloc(fieldBloc: fieldBloc, listBloc: listBloc);
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AutoBloc>(
+          create: (context) => autoBloc,
+        ),
         BlocProvider<FieldBloc>(
           create: (context) => fieldBloc,
         ),
@@ -35,7 +40,7 @@ class AutoWidget extends StatelessWidget {
     TextEditingController fieldController = TextEditingController();
     return Column(
       children: [
-        FieldWidget( fieldController: fieldController),
+        FieldWidget(fieldController: fieldController),
         SizedBox(height: 8.0),
         ListWidget(fieldController: fieldController),
       ],
