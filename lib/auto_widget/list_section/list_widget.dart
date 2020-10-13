@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:untitled4/auto_widget/auto_model.dart';
 import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
 import 'package:untitled4/auto_widget/list_section/list_bloc.dart';
 
 class ListWidget extends StatelessWidget {
+  final TextEditingController fieldController;
+
+  const ListWidget({Key key, this.fieldController}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
@@ -15,7 +20,7 @@ class ListWidget extends StatelessWidget {
           if (listState is HiddenListState) return Container();
           List<Widget> widgets = List();
           for (AutoModel autoModel in (listState as FilteredListState).list)
-            widgets.add(_itemWidget(context, autoModel));
+            widgets.add(_itemWidget(context, autoModel, fieldController));
           return Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
@@ -31,7 +36,7 @@ class ListWidget extends StatelessWidget {
         });
   }
 
-  Widget _itemWidget(BuildContext context, AutoModel autoModel) {
+  Widget _itemWidget(BuildContext context, AutoModel autoModel, TextEditingController fieldController) {
     return Container(
       height: 48.0,
       child: InkWell(
@@ -45,8 +50,9 @@ class ListWidget extends StatelessWidget {
           ),
         ),
         onTap: () {
-          BlocProvider.of<FieldBloc>(context)
-              .add(InitialFieldEvent(autoModel.value));
+          // BlocProvider.of<FieldBloc>(context)
+          //     .add(InitialFieldEvent(autoModel.value));
+          fieldController.text = 'zzzz';
         },
       ),
     );

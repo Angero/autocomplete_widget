@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:untitled4/auto_widget/auto_model.dart';
 import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
 import 'package:untitled4/auto_widget/field_section/field_widget.dart';
@@ -27,31 +28,16 @@ class AutoWidget extends StatelessWidget {
         ),
       ],
       child: _buildColumn(),
-/*
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<FieldBloc, FieldState>(
-            bloc: fieldBloc,
-            listener: (context, state) {
-              if (state is ChangedFieldState)
-                listBloc.add(FilterListEvent(state.value));
-              else
-                listBloc.add(FilterListEvent(''));
-            },
-          ),
-        ],
-        child: _buildColumn(),
-      ),
-*/
     );
   }
 
   Column _buildColumn() {
+    TextEditingController fieldController = TextEditingController();
     return Column(
       children: [
-        FieldWidget(),
+        FieldWidget( fieldController: fieldController),
         SizedBox(height: 8.0),
-        ListWidget(),
+        ListWidget(fieldController: fieldController),
       ],
     );
   }
