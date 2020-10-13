@@ -29,8 +29,8 @@ class FieldWidget extends StatelessWidget {
             onChanged: (value) {
               fieldBloc.add(ChangeFieldEvent(value));
               listBloc.add(FilterListEvent(value));
-              autoBloc.add(
-                  CompareAutoEvent(fieldBloc: fieldBloc, listBloc: listBloc));
+              autoBloc.add(CompareAutoEvent(
+                  fieldBloc: fieldBloc, listBloc: listBloc, value: value));
             },
           );
         });
