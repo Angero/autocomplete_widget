@@ -31,7 +31,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
       if (!(_list.length == 1 &&
           _list.elementAt(0).value.toLowerCase() ==
               event.filterValue.toLowerCase())) {
-        result = FilteredListState(_list);
+        if (_list.length > 0) result = FilteredListState(_list);
       }
     }
     if (result == null)
