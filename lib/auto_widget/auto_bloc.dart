@@ -16,28 +16,18 @@ class AutoBloc extends Bloc<AutoEvent, AutoState> {
 
   @override
   Stream<AutoState> mapEventToState(AutoEvent event) async* {
-    if (event is CompareAutoEvent) {
-      if (event.value.isNotEmpty) {
-        List<AutoModel> _list = event.listBloc.list
-            .where((AutoModel autoModel) => autoModel.value
-                .toLowerCase()
-                .contains(event.value.toLowerCase()))
-            .toList();
-        if (_list.length > 0) {
-          if (_list.length == 1 &&
-              _list.elementAt(0).value.toLowerCase() ==
-                  event.value.toLowerCase()) {
-            print('success');
-            yield FetchedAutoState(_list.elementAt(0).id);
-          } else {
-            yield FetchedAutoState(null);
-          }
-        } else {
-          yield FetchedAutoState(null);
-        }
-      } else {
-        yield FetchedAutoState(null);
+    int result;
+    if (event is CompareAutoEvent && event.value.isNotEmpty) {
+      List<AutoModel> _list = event.listBloc.list
+          .where((AutoModel autoModel) =>
+              autoModel.value.toLowerCase().contains(event.value.toLowerCase()))
+          .toList();
+      if (_list.length == 1 &&
+          _list.elementAt(0).value.toLowerCase() == event.value.toLowerCase()) {
+        print('success');
+        result = _list.elementAt(0).id;
       }
+      yield FetchedAutoState(result);
     }
   }
 }
