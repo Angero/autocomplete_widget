@@ -20,8 +20,11 @@ class FieldWidget extends StatelessWidget {
     return BlocBuilder<FieldBloc, FieldState>(
         bloc: fieldBloc,
         builder: (BuildContext context, FieldState fieldState) {
-          if (fieldState is InitialedFieldState)
+          if (fieldState is InitialedFieldState) {
             fieldController.text = fieldState.value;
+            fieldController.selection = TextSelection.fromPosition(
+                TextPosition(offset: fieldController.text.length));
+          }
           return TextField(
             controller: fieldController,
             decoration: InputDecoration(
