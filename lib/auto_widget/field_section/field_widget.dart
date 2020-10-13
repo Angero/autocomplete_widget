@@ -26,6 +26,7 @@ class FieldWidget extends StatelessWidget {
                 TextPosition(offset: fieldController.text.length));
           }
           return TextField(
+
             controller: fieldController,
             decoration: InputDecoration(
                 errorText: fieldState is ErrorFieldState ? 'Error' : null),
