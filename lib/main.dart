@@ -58,15 +58,16 @@ class _MainState extends State<Main> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Main'),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.info_outline), onPressed: null),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: AutoWidget(autoList: list),
+        child: AutoWidget(
+          autoList: list,
+          onChoice: (int id) {
+            print(id.toString());
+          },
+        ),
       ),
     );
   }
 }
-

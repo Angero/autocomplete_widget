@@ -11,6 +11,10 @@ part 'auto_event.dart';
 part 'auto_state.dart';
 
 class AutoBloc extends Bloc<AutoEvent, AutoState> {
+  final Function(int) onChoice;
+
+  AutoBloc({this.onChoice});
+
   @override
   AutoState get initialState => FetchedAutoState(null);
 
@@ -24,9 +28,10 @@ class AutoBloc extends Bloc<AutoEvent, AutoState> {
           .toList();
       if (_list.length == 1 &&
           _list.elementAt(0).value.toLowerCase() == event.value.toLowerCase()) {
-        print('success');
         result = _list.elementAt(0).id;
+        onChoice(result);
       }
+      print(result == null ? 'null' : 'success');
       yield FetchedAutoState(result);
     }
   }

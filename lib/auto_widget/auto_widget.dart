@@ -9,13 +9,16 @@ import 'package:untitled4/auto_widget/list_section/list_widget.dart';
 
 class AutoWidget extends StatelessWidget {
   final List<AutoModel> autoList;
+  final Function(int) onChoice;
 
-  const AutoWidget({Key key, this.autoList}) : super(key: key);
+  const AutoWidget({Key key, this.autoList, this.onChoice}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    AutoBloc autoBloc = AutoBloc();
+    AutoBloc autoBloc = AutoBloc(onChoice: (id) {
+      onChoice(id);
+    });
     // ignore: close_sinks
     FieldBloc fieldBloc = FieldBloc(autoList);
     // ignore: close_sinks

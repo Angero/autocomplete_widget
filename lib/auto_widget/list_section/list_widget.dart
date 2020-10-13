@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled4/auto_widget/auto_bloc.dart';
 import 'package:untitled4/auto_widget/auto_model.dart';
 import 'package:untitled4/auto_widget/field_section/field_bloc.dart';
 import 'package:untitled4/auto_widget/list_section/list_bloc.dart';
@@ -12,6 +13,10 @@ class ListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
+    AutoBloc autoBloc = BlocProvider.of<AutoBloc>(context);
+    // ignore: close_sinks
+    FieldBloc fieldBloc = BlocProvider.of<FieldBloc>(context);
+    // ignore: close_sinks
     ListBloc listBloc = BlocProvider.of<ListBloc>(context);
     return BlocBuilder<ListBloc, ListState>(
         bloc: listBloc,
@@ -19,7 +24,14 @@ class ListWidget extends StatelessWidget {
           if (listState is HiddenListState) return Container();
           List<Widget> widgets = List();
           for (AutoModel autoModel in (listState as FilteredListState).list)
-            widgets.add(_itemWidget(context, autoModel, fieldController));
+            widgets.add(_itemWidget(
+              context: context,
+              autoBloc: autoBloc,
+              fieldBloc: fieldBloc,
+              listBloc: listBloc,
+              autoModel: autoModel,
+              fieldController: fieldController,
+            ));
           return Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
@@ -35,8 +47,13 @@ class ListWidget extends StatelessWidget {
         });
   }
 
-  Widget _itemWidget(BuildContext context, AutoModel autoModel,
-      TextEditingController fieldController) {
+  Widget _itemWidget(
+      {BuildContext context,
+      AutoBloc autoBloc,
+      FieldBloc fieldBloc,
+      ListBloc listBloc,
+      AutoModel autoModel,
+      TextEditingController fieldController}) {
     return Container(
       height: 48.0,
       child: InkWell(
@@ -54,6 +71,10 @@ class ListWidget extends StatelessWidget {
               .add(InitialFieldEvent(autoModel.value));
           BlocProvider.of<ListBloc>(context)
               .add(FilterListEvent(autoModel.value));
+          autoBloc.add(CompareAutoEvent(
+              fieldBloc: fieldBloc,
+              listBloc: listBloc,
+              value: autoModel.value));
         },
       ),
     );
